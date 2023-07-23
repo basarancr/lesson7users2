@@ -22,7 +22,7 @@ export default function SignIn({ setSession, setLogin }) {
     const { error } = await supabase.auth.signIn({ email, password });
     if (error) setError(error.message);
   };
-  
+
 
   async function signIn() {
     try {
@@ -40,10 +40,14 @@ export default function SignIn({ setSession, setLogin }) {
   return (
     <div>
       <h2>ログイン</h2>
+      {error && <p className="text-red-500">{error}</p>}
+      <form onSubmit={handleSignIn}>
       <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
       <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
       <button onClick={signIn}>ログイン</button>
       <button onClick={() => setLogin(false)}>新規登録</button>
+      </form>
+
     </div>
   );
 }

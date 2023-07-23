@@ -21,7 +21,7 @@ export default function SignUp({ setLogin }) {
       return;
     }
   
-    const { error } = await supabase.auth.signUp({ email, password });
+    const { error } = await supabase.auth.signUp({ name, email, password });
     if (error) setError(error.message);
     else setLogin(true);
   };
@@ -30,6 +30,7 @@ export default function SignUp({ setLogin }) {
   async function signUp() {
     try {
       const { user, error } = await supabase.auth.signUp({
+        name,
         email,
         password,
       });
